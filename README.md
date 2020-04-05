@@ -1,2 +1,4 @@
-# 6502_ai
+# 6502 AI
+
 Coming soon!
+
