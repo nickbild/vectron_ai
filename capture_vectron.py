@@ -9,6 +9,23 @@ from PIL import Image
 import numpy as np
 
 
+def threshold(v):
+    if v < 10:
+        v = 0
+    elif v < 20:
+        v = 1
+    elif v < 30:
+        v = 2
+    elif v < 40:
+        v = 3
+    elif v < 50:
+        v = 4
+    else:
+        v = 5
+
+    return v
+
+
 with picamera.PiCamera() as camera:
     # Configure and warm up camera.
     camera.color_effects = (128, 128)
@@ -30,10 +47,11 @@ with picamera.PiCamera() as camera:
         p = p.flatten()[0::3]
 
         for v in p:
+            v = threshold(v)
             print(v)
             bin = '{0:08b}'.format(v)
             print(bin)
-            for bit in bin:
+            for bit in bin: # MSB first.
                 print(bit)
             print("----")
 
