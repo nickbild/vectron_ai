@@ -1,3 +1,8 @@
+####
+# Nick Bild
+# nick.bild@gmail.com
+# Capture training/test datasets.
+####
 import picamera
 import time
 from PIL import Image
@@ -32,4 +37,3 @@ with picamera.PiCamera() as camera:
 
         with open('{}/image_{}.txt'.format(folder, cnt), 'w') as f:
             f.writelines("%s\n" % v for v in p)
-
