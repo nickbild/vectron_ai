@@ -33,6 +33,8 @@ with picamera.PiCamera() as camera:
             print(v)
             bin = '{0:08b}'.format(v)
             print(bin)
+            for bit in bin:
+                print(bit)
             print("----")
 
         time.sleep(5)
