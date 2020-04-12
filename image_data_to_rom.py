@@ -1,4 +1,4 @@
-folders = ["train/up", "train/down", "train/left", "train/right"]
+folders = ["train/up", "train/down", "train/left", "train/right", "train/nothing"]
 start = 0
 end = 20
 

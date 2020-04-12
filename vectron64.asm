@@ -39,7 +39,7 @@ MinValue
 		.byte #$00
 RunningTotal
 		.byte #$00
-Class             ; 0=up; 1=down; 2=left, 3=right
+Class             ; 0=up; 1=down; 2=left, 3=right; 4=nothing
 		.byte #$00
 
 ; Start at beginning of ROM.
@@ -1756,6 +1756,460 @@ Image9_right_skip2
   lda #$03
   sta Class
 Image9_right_skip3
+
+
+  ;;;
+  ; NOTHING
+  ;;;
+
+  ldy #$00
+  sty RunningTotal
+Image0_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image0_nothing,y
+  cmp $04,y
+  bcc Image0_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image0_nothing_skip2
+Image0_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image0_nothing,y
+Image0_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image0_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image0_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image0_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image1_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image1_nothing,y
+  cmp $04,y
+  bcc Image1_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image1_nothing_skip2
+Image1_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image1_nothing,y
+Image1_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image1_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image1_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image1_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image2_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image2_nothing,y
+  cmp $04,y
+  bcc Image2_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image2_nothing_skip2
+Image2_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image2_nothing,y
+Image2_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image2_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image2_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image2_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image3_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image3_nothing,y
+  cmp $04,y
+  bcc Image3_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image3_nothing_skip2
+Image3_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image3_nothing,y
+Image3_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image3_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image3_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image3_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image4_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image4_nothing,y
+  cmp $04,y
+  bcc Image4_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image4_nothing_skip2
+Image4_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image4_nothing,y
+Image4_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image4_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image4_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image4_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image5_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image5_nothing,y
+  cmp $04,y
+  bcc Image5_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image5_nothing_skip2
+Image5_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image5_nothing,y
+Image5_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image5_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image5_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image5_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image6_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image6_nothing,y
+  cmp $04,y
+  bcc Image6_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image6_nothing_skip2
+Image6_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image6_nothing,y
+Image6_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image6_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image6_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image6_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image7_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image7_nothing,y
+  cmp $04,y
+  bcc Image7_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image7_nothing_skip2
+Image7_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image7_nothing,y
+Image7_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image7_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image7_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image7_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image8_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image8_nothing,y
+  cmp $04,y
+  bcc Image8_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image8_nothing_skip2
+Image8_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image8_nothing,y
+Image8_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image8_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image8_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image8_nothing_skip3
+
+
+  ldy #$00
+  sty RunningTotal
+Image9_nothing_loop
+  ; Determine order of values (max first) and do subtraction.
+  lda Image9_nothing,y
+  cmp $04,y
+  bcc Image9_nothing_skip1 ; if A < cmp value
+  ; A >= cmp value at this point
+  sbc $04,y
+  jmp Image9_nothing_skip2
+Image9_nothing_skip1
+  ; A < cmp value at this point
+  lda $04,y
+  sbc Image9_nothing,y
+Image9_nothing_skip2
+
+  ; Add current pixel difference to running total
+  ; for this image.
+  adc RunningTotal
+  sta RunningTotal
+
+  iny
+  cpy #$64
+  bne Image9_nothing_loop
+
+  ; If RunningTotal < MinValue:
+  ; MinValue = RunningTotal
+  ; Class = current class
+  lda RunningTotal
+  cmp MinValue
+  bcs Image9_nothing_skip3 ; if A >= cmp value
+  ; MinValue < RunningTotal at this point
+  sta MinValue
+  lda #$04
+  sta Class
+Image9_nothing_skip3
+
+
+
+  lda Class
+  cmp #$00
+  bne next1
+
+  ; 0
+  lda #$38
+  sta $7FC2
+  lda #$08
+  sta $7FC3
+  jsr WriteLCD
+  jmp ALLDONE
+
+next1
+  lda Class
+  cmp #$01
+  bne next2
+
+  ; 1
+  lda #$38
+  sta $7FC2
+  lda #$18
+  sta $7FC3
+  jsr WriteLCD
+  jmp ALLDONE
+
+next2
+  lda Class
+  cmp #$02
+  bne next3
+
+  ; 2
+  lda #$38
+  sta $7FC2
+  lda #$28
+  sta $7FC3
+  jsr WriteLCD
+  jmp ALLDONE
+
+next3
+  lda Class
+  cmp #$03
+  bne next4
+
+  ; 3
+  lda #$38
+  sta $7FC2
+  lda #$38
+  sta $7FC3
+  jsr WriteLCD
+  jmp ALLDONE
+
+next4
+  lda Class
+  cmp #$04
+  bne next5
+
+  ; 4
+  lda #$38
+  sta $7FC2
+  lda #$48
+  sta $7FC3
+  jsr WriteLCD
+  jmp ALLDONE
+
+next5
+ALLDONE
+
 
   rts
 
@@ -9912,6 +10366,2047 @@ Image19_right
     .byte #$05
     .byte #$05
     .byte #$02
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+
+Image0_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image1_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image2_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image3_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image4_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image5_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image6_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image7_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image8_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image9_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image10_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image11_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image12_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image13_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image14_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image15_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image16_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image17_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image18_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+
+Image19_nothing
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
+    .byte #$05
     .byte #$05
     .byte #$05
     .byte #$05
