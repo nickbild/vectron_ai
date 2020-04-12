@@ -97,4 +97,6 @@ with picamera.PiCamera() as camera:
             GPIO.output(interrupt, GPIO.HIGH)
 
             # Wait for interrupt to clear.
-            GPIO.wait_for_edge(interrupt_clear, GPIO.FALLING)
+            if GPIO.input(interrupt_clear) == GPIO.HIGH:
+                pass
+
