@@ -6,8 +6,13 @@
 ; Reserved memory:
 ; $0000 - LCD enable
 ; $0001 - Unused -- read it to disable any IC (except RAM).
-; $0002 - Current LCD cursor position.
-; $0004-$0067 - Current image pixel data.
+; $0002 - Offset into memory for current image pixel data.
+; $0003 - Minimum difference found between current image
+;					and all known images.
+; $0004 - The running total of pixel differences for a
+;					single image comparison.
+; $0005 - The predicted class of the current image.
+; $0006-$0069 - Current image pixel data.
 ; $0100-$01FF - 6502 stack
 ; $7FBE-$7FBF - Temporary location for LCD data manipulation.
 ; $7FC0-$7FFF - Data to write to LCD.
@@ -206,7 +211,7 @@ ZeroLoop	lda #$28
 ClassifierIsr
     lda $FFF9  ; Read the shift register.
 		ldx ImageOffset
-    sta $04,x
+    sta $06,x
     inc ImageOffset
 
     ; If data is in for all 100 pixels...
@@ -241,15 +246,15 @@ FindNearestNeighbor
 Image0_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image0_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image0_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-	sbc $04,y
+	sbc $06,y
   jmp Image0_up_skip2
 Image0_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
 	sbc Image0_up,y
 Image0_up_skip2
@@ -282,15 +287,15 @@ Image0_up_skip3
 Image1_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image1_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image1_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-	sbc $04,y
+	sbc $06,y
   jmp Image1_up_skip2
 Image1_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image1_up,y
 Image1_up_skip2
@@ -323,15 +328,15 @@ Image1_up_skip3
 Image2_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image2_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image2_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image2_up_skip2
 Image2_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image2_up,y
 Image2_up_skip2
@@ -364,15 +369,15 @@ Image2_up_skip3
 Image3_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image3_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image3_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image3_up_skip2
 Image3_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image3_up,y
 Image3_up_skip2
@@ -405,15 +410,15 @@ Image3_up_skip3
 Image4_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image4_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image4_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image4_up_skip2
 Image4_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image4_up,y
 Image4_up_skip2
@@ -446,15 +451,15 @@ Image4_up_skip3
 Image5_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image5_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image5_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image5_up_skip2
 Image5_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image5_up,y
 Image5_up_skip2
@@ -487,15 +492,15 @@ Image5_up_skip3
 Image6_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image6_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image6_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image6_up_skip2
 Image6_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image6_up,y
 Image6_up_skip2
@@ -528,15 +533,15 @@ Image6_up_skip3
 Image7_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image7_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image7_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image7_up_skip2
 Image7_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image7_up,y
 Image7_up_skip2
@@ -569,15 +574,15 @@ Image7_up_skip3
 Image8_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image8_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image8_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image8_up_skip2
 Image8_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image8_up,y
 Image8_up_skip2
@@ -610,15 +615,15 @@ Image8_up_skip3
 Image9_up_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image9_up,y
-  cmp $04,y
+  cmp $06,y
   bcc Image9_up_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image9_up_skip2
 Image9_up_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image9_up,y
 Image9_up_skip2
@@ -655,15 +660,15 @@ Image9_up_skip3
 Image0_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image0_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image0_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image0_down_skip2
 Image0_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image0_down,y
 Image0_down_skip2
@@ -696,15 +701,15 @@ Image0_down_skip3
 Image1_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image1_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image1_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image1_down_skip2
 Image1_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image1_down,y
 Image1_down_skip2
@@ -737,15 +742,15 @@ Image1_down_skip3
 Image2_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image2_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image2_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image2_down_skip2
 Image2_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image2_down,y
 Image2_down_skip2
@@ -778,15 +783,15 @@ Image2_down_skip3
 Image3_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image3_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image3_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image3_down_skip2
 Image3_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image3_down,y
 Image3_down_skip2
@@ -819,15 +824,15 @@ Image3_down_skip3
 Image4_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image4_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image4_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image4_down_skip2
 Image4_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image4_down,y
 Image4_down_skip2
@@ -860,15 +865,15 @@ Image4_down_skip3
 Image5_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image5_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image5_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image5_down_skip2
 Image5_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image5_down,y
 Image5_down_skip2
@@ -901,15 +906,15 @@ Image5_down_skip3
 Image6_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image6_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image6_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image6_down_skip2
 Image6_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image6_down,y
 Image6_down_skip2
@@ -942,15 +947,15 @@ Image6_down_skip3
 Image7_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image7_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image7_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image7_down_skip2
 Image7_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image7_down,y
 Image7_down_skip2
@@ -983,15 +988,15 @@ Image7_down_skip3
 Image8_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image8_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image8_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image8_down_skip2
 Image8_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image8_down,y
 Image8_down_skip2
@@ -1024,15 +1029,15 @@ Image8_down_skip3
 Image9_down_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image9_down,y
-  cmp $04,y
+  cmp $06,y
   bcc Image9_down_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image9_down_skip2
 Image9_down_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image9_down,y
 Image9_down_skip2
@@ -1069,15 +1074,15 @@ Image9_down_skip3
 Image0_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image0_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image0_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image0_left_skip2
 Image0_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image0_left,y
 Image0_left_skip2
@@ -1110,15 +1115,15 @@ Image0_left_skip3
 Image1_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image1_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image1_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image1_left_skip2
 Image1_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image1_left,y
 Image1_left_skip2
@@ -1151,15 +1156,15 @@ Image1_left_skip3
 Image2_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image2_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image2_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image2_left_skip2
 Image2_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image2_left,y
 Image2_left_skip2
@@ -1192,15 +1197,15 @@ Image2_left_skip3
 Image3_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image3_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image3_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image3_left_skip2
 Image3_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image3_left,y
 Image3_left_skip2
@@ -1233,15 +1238,15 @@ Image3_left_skip3
 Image4_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image4_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image4_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image4_left_skip2
 Image4_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image4_left,y
 Image4_left_skip2
@@ -1274,15 +1279,15 @@ Image4_left_skip3
 Image5_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image5_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image5_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image5_left_skip2
 Image5_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image5_left,y
 Image5_left_skip2
@@ -1315,15 +1320,15 @@ Image5_left_skip3
 Image6_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image6_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image6_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image6_left_skip2
 Image6_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image6_left,y
 Image6_left_skip2
@@ -1356,15 +1361,15 @@ Image6_left_skip3
 Image7_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image7_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image7_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image7_left_skip2
 Image7_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image7_left,y
 Image7_left_skip2
@@ -1397,15 +1402,15 @@ Image7_left_skip3
 Image8_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image8_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image8_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image8_left_skip2
 Image8_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image8_left,y
 Image8_left_skip2
@@ -1438,15 +1443,15 @@ Image8_left_skip3
 Image9_left_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image9_left,y
-  cmp $04,y
+  cmp $06,y
   bcc Image9_left_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image9_left_skip2
 Image9_left_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image9_left,y
 Image9_left_skip2
@@ -1483,15 +1488,15 @@ Image9_left_skip3
 Image0_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image0_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image0_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image0_right_skip2
 Image0_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image0_right,y
 Image0_right_skip2
@@ -1524,15 +1529,15 @@ Image0_right_skip3
 Image1_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image1_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image1_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image1_right_skip2
 Image1_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image1_right,y
 Image1_right_skip2
@@ -1565,15 +1570,15 @@ Image1_right_skip3
 Image2_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image2_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image2_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image2_right_skip2
 Image2_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image2_right,y
 Image2_right_skip2
@@ -1606,15 +1611,15 @@ Image2_right_skip3
 Image3_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image3_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image3_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image3_right_skip2
 Image3_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image3_right,y
 Image3_right_skip2
@@ -1647,15 +1652,15 @@ Image3_right_skip3
 Image4_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image4_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image4_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image4_right_skip2
 Image4_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image4_right,y
 Image4_right_skip2
@@ -1688,15 +1693,15 @@ Image4_right_skip3
 Image5_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image5_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image5_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image5_right_skip2
 Image5_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image5_right,y
 Image5_right_skip2
@@ -1729,15 +1734,15 @@ Image5_right_skip3
 Image6_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image6_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image6_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image6_right_skip2
 Image6_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image6_right,y
 Image6_right_skip2
@@ -1770,15 +1775,15 @@ Image6_right_skip3
 Image7_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image7_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image7_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image7_right_skip2
 Image7_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image7_right,y
 Image7_right_skip2
@@ -1811,15 +1816,15 @@ Image7_right_skip3
 Image8_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image8_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image8_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image8_right_skip2
 Image8_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image8_right,y
 Image8_right_skip2
@@ -1852,15 +1857,15 @@ Image8_right_skip3
 Image9_right_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image9_right,y
-  cmp $04,y
+  cmp $06,y
   bcc Image9_right_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image9_right_skip2
 Image9_right_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image9_right,y
 Image9_right_skip2
@@ -1897,15 +1902,15 @@ Image9_right_skip3
 Image0_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image0_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image0_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image0_nothing_skip2
 Image0_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image0_nothing,y
 Image0_nothing_skip2
@@ -1938,15 +1943,15 @@ Image0_nothing_skip3
 Image1_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image1_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image1_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image1_nothing_skip2
 Image1_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image1_nothing,y
 Image1_nothing_skip2
@@ -1979,15 +1984,15 @@ Image1_nothing_skip3
 Image2_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image2_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image2_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image2_nothing_skip2
 Image2_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image2_nothing,y
 Image2_nothing_skip2
@@ -2020,15 +2025,15 @@ Image2_nothing_skip3
 Image3_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image3_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image3_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image3_nothing_skip2
 Image3_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image3_nothing,y
 Image3_nothing_skip2
@@ -2061,15 +2066,15 @@ Image3_nothing_skip3
 Image4_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image4_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image4_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image4_nothing_skip2
 Image4_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image4_nothing,y
 Image4_nothing_skip2
@@ -2102,15 +2107,15 @@ Image4_nothing_skip3
 Image5_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image5_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image5_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image5_nothing_skip2
 Image5_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image5_nothing,y
 Image5_nothing_skip2
@@ -2143,15 +2148,15 @@ Image5_nothing_skip3
 Image6_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image6_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image6_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image6_nothing_skip2
 Image6_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image6_nothing,y
 Image6_nothing_skip2
@@ -2184,15 +2189,15 @@ Image6_nothing_skip3
 Image7_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image7_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image7_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image7_nothing_skip2
 Image7_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image7_nothing,y
 Image7_nothing_skip2
@@ -2225,15 +2230,15 @@ Image7_nothing_skip3
 Image8_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image8_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image8_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image8_nothing_skip2
 Image8_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image8_nothing,y
 Image8_nothing_skip2
@@ -2266,15 +2271,15 @@ Image8_nothing_skip3
 Image9_nothing_loop
   ; Determine order of values (max first) and do subtraction.
   lda Image9_nothing,y
-  cmp $04,y
+  cmp $06,y
   bcc Image9_nothing_skip1 ; if A < cmp value
   ; A >= cmp value at this point
   sec
-  sbc $04,y
+  sbc $06,y
   jmp Image9_nothing_skip2
 Image9_nothing_skip1
   ; A < cmp value at this point
-  lda $04,y
+  lda $06,y
   sec
   sbc Image9_nothing,y
 Image9_nothing_skip2
