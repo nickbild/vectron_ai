@@ -19,7 +19,7 @@ latch = 10
 clock = 12
 
 interrupt = 16
-interrupt_clear = 18
+interrupt_clear = 22
 
 # Shift register.
 GPIO.setup(data, GPIO.OUT, initial=GPIO.LOW)
@@ -30,6 +30,7 @@ GPIO.setup(clock, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(interrupt, GPIO.OUT, initial=GPIO.HIGH)
 GPIO.setup(interrupt_clear, GPIO.IN)
 
+GPIO.add_event_detect(interrupt_clear, GPIO.FALLING)
 
 def threshold(v):
     if v < 10:
@@ -93,10 +94,11 @@ with picamera.PiCamera() as camera:
 
             # Send interrupt to Vectron 64.
             GPIO.output(interrupt, GPIO.LOW)
-            time.sleep(0.00002) # 20 microseconds
+            GPIO.output(interrupt, GPIO.LOW)
+            GPIO.output(interrupt, GPIO.LOW)
             GPIO.output(interrupt, GPIO.HIGH)
 
             # Wait for interrupt to clear.
-            if GPIO.input(interrupt_clear) == GPIO.HIGH:
+            while GPIO.event_detected(interrupt_clear) == False:
                 pass
 
