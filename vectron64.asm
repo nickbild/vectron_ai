@@ -21,6 +21,11 @@
 ;               Most sig. 4 bits are for LCD data.
 ;               Least sig. 4 bits - only bit 3 used (tied to RS pin).
 ;
+; $FFF4 - Send up arrow command to 2600 emulator.
+; $FFF5 - Send down arrow command to 2600 emulator.
+; $FFF6 - Send left arrow command to 2600 emulator.
+; $FFF7 - Send right arrow command to 2600 emulator.
+;
 ; $FFF8 - Send low signal to OE on shift register containing image pixel data.
 ; $FFF9 - Send an interrput clear to the Raspberry Pi.
 ;
@@ -2310,11 +2315,18 @@ Image9_nothing_skip3
 
 	; Display class.
 
+	; $FFF4 - Send up arrow command to 2600 emulator.
+	; $FFF5 - Send down arrow command to 2600 emulator.
+	; $FFF6 - Send left arrow command to 2600 emulator.
+	; $FFF7 - Send right arrow command to 2600 emulator.
+
   lda Class
   cmp #$00
   bne next1
 
   ; 0
+	lda $FFF4 ; Send up arrow.
+
   lda #$38
   sta $7FC2
   lda #$08
@@ -2328,6 +2340,8 @@ next1
   bne next2
 
   ; 1
+	lda $FFF5 ; Send down arrow.
+
   lda #$38
   sta $7FC2
   lda #$18
@@ -2341,6 +2355,8 @@ next2
   bne next3
 
   ; 2
+	lda $FFF6 ; Send left arrow.
+
   lda #$38
   sta $7FC2
   lda #$28
@@ -2354,6 +2370,8 @@ next3
   bne next4
 
   ; 3
+	lda $FFF7 ; Send right arrow.
+
   lda #$38
   sta $7FC2
   lda #$38
