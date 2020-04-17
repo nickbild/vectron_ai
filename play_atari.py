@@ -4,7 +4,10 @@
 # Control Atari 2600 emulator via GPIO.
 ####
 import RPi.GPIO as GPIO
+import autopy
 
+
+key_hold_time_sec = 0.1
 
 up = 8
 down = 10
@@ -27,13 +30,21 @@ GPIO.add_event_detect(right, GPIO.FALLING)
 while True:
     # Check for an input
     if GPIO.event_detected(up) == True:
-        pass
+        autopy.key.toggle(autopy.key.Code.UP_ARROW, True, [], 0)
+        time.sleep(key_hold_time_sec)
+        autopy.key.toggle(autopy.key.Code.UP_ARROW, False, [], 0)
 
     if GPIO.event_detected(down) == True:
-        pass
+        autopy.key.toggle(autopy.key.Code.DOWN_ARROW, True, [], 0)
+        time.sleep(key_hold_time_sec)
+        autopy.key.toggle(autopy.key.Code.DOWN_ARROW, False, [], 0)
 
     if GPIO.event_detected(left) == True:
-        pass
+        autopy.key.toggle(autopy.key.Code.LEFT_ARROW, True, [], 0)
+        time.sleep(key_hold_time_sec)
+        autopy.key.toggle(autopy.key.Code.LEFT_ARROW, False, [], 0)
 
     if GPIO.event_detected(right) == True:
-        pass
+        autopy.key.toggle(autopy.key.Code.RIGHT_ARROW, True, [], 0)
+        time.sleep(key_hold_time_sec)
+        autopy.key.toggle(autopy.key.Code.RIGHT_ARROW, False, [], 0)
