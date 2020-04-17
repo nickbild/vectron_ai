@@ -21,8 +21,8 @@
 ;               Most sig. 4 bits are for LCD data.
 ;               Least sig. 4 bits - only bit 3 used (tied to RS pin).
 ;
-; $FFF8 - Send an interrput clear to the Raspberry Pi.
-; $FFF9 - Send low signal to OE on shift register containing image pixel data.
+; $FFF8 - Send low signal to OE on shift register containing image pixel data.
+; $FFF9 - Send an interrput clear to the Raspberry Pi.
 ;
 ; $FFFA - NMI IRQ Vector
 ; $FFFB - NMI IRQ Vector
@@ -209,7 +209,7 @@ ZeroLoop	lda #$28
 ;;;
 
 ClassifierIsr
-    lda $FFF9  ; Read the shift register.
+    lda $FFF8  ; Read the shift register.
 		ldx ImageOffset
     sta $06,x
     inc ImageOffset
@@ -224,10 +224,12 @@ ClassifierIsr
     sta ImageOffset
 		lda #$FF
     sta MinValue
-    ; else...
+
+		; else...
 INCOMPLETE
 
-    lda $FFF8  ; Send an interrupt clear.
+		; Send an interrupt clear.
+    lda $FFF9
 
 		rti
 
@@ -274,8 +276,8 @@ Image0_up_skip2
   ; Class = current class
   lda RunningTotal
   cmp MinValue
-  bcs Image0_up_skip3 ; if A >= cmp value
-  ; MinValue < RunningTotal at this point
+  bcs Image0_up_skip3 ; if RunningTotal >= MinValue, branch
+  ; RunningTotal < MinValue at this point
   sta MinValue
   lda #$00
   sta Class
@@ -2306,8 +2308,6 @@ Image9_nothing_skip2
   sta Class
 Image9_nothing_skip3
 
-
-
 	; Display class.
 
   lda Class
@@ -2376,35 +2376,6 @@ next4
 
 next5
 ALLDONE
-
-
-	; display min value.
-	lda #$0F
-	ora MinValue
-	sta $7FC4
-
-	lda MinValue
-	sta $7FC5
-	rol $7FC5
-	rol $7FC5
-	rol $7FC5
-	rol $7FC5
-	lda #$0F
-	ora $7FC5
-	sta $7FC5
-
-	; Changing value - 10001000
-	lda $7FC6
-	clc
-	adc #$10
-	sta $7FC6
-	lda $7FC7
-	clc
-	adc #$10
-	sta $7FC7
-
-	jsr WriteLCD
-
 
   rts
 
