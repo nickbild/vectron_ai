@@ -2308,12 +2308,7 @@ Image9_nothing_skip2
   sta Class
 Image9_nothing_skip3
 
-	; Display class.
-
-	; $FFF4 - Send up arrow command to 2600 emulator.
-	; $FFF5 - Send down arrow command to 2600 emulator.
-	; $FFF6 - Send left arrow command to 2600 emulator.
-	; $FFF7 - Send right arrow command to 2600 emulator.
+	; Display class, and send signals to 2600.
 
   lda Class
   cmp #$00
