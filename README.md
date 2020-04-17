@@ -8,7 +8,7 @@ Vectron AI interfaces with the [Vectron 64](https://github.com/nickbild/vectron_
 
 ## How It Works
 
-Images are captured, downscaled, and converted to an integer vector by a Raspberry Pi 3 B+.  The vector is the transferred, one byte at a time, to a shift register in Vectron AI.  After each byte is loaded, an interrupt is sent to the Vectron 64 computer.
+Images are captured, downscaled, and converted to an integer vector by a Raspberry Pi 3 B+.  The vector is then transferred, one byte at a time, to a shift register in Vectron AI.  After each byte is loaded, an interrupt is sent to the Vectron 64 computer.
 
 The Vectron 64 retrieves each byte and stores it in RAM.  When a full image has been received, it runs a k-nearest neighbors algorithm to classify the current image against 50 known images that are stored in the ROM.  The class of the best match (minimum sum of all pixel distances) determines the predicted class of the current image.  The 6502 assembly can be found [here](https://github.com/nickbild/vectron_ai/blob/master/vectron64.asm).
 
