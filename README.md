@@ -20,15 +20,15 @@ When this is all put together, you can place your hand in front of the camera wi
 
 ## Bill of Materials
 
-1 x [Vectron 64](https://github.com/nickbild/vectron_64)
-2 x Raspberry Pi 3 Model B+
-1 x Raspberry Pi Camera v2
-1 x Logic Level Shifter (3.3V -> 5V)
-1 x Logic Level Shifter (5V -> 3.3V)
-1 x 74HC32 Quad OR Gate
-1 x 74HC595 Shift Register
-4 x 74HCT688E Logic Comparator
-1 x Miscellaneous Wire
+- 1 x [Vectron 64](https://github.com/nickbild/vectron_64)
+- 2 x Raspberry Pi 3 Model B+
+- 1 x Raspberry Pi Camera v2
+- 1 x Logic Level Shifter (3.3V -> 5V)
+- 1 x Logic Level Shifter (5V -> 3.3V)
+- 1 x 74HC32 Quad OR Gate
+- 1 x 74HC595 Shift Register
+- 4 x 74HCT688E Logic Comparator
+- 1 x Miscellaneous Wire
 
 ## About the Author
 
