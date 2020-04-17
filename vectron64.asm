@@ -75,11 +75,6 @@ StartExe	ORG $8000
     sta $7FC1
     jsr WriteLCD
 
-		; Temporary
-		lda #$88
-		sta $7FC6
-		sta $7FC7
-
 		cli
 
 MainLoop
