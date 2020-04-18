@@ -18,6 +18,12 @@ When this is all put together, you can place your hand in front of the camera wi
 
 ## Media
 
+Some examples of downscaled images that the Vectron 64 processes.  They have a beautiful 8-bit appearance.  As someone with more experience working with higher resolution images on artificial neural networks, I was a bit shocked by how accurate a simple algorithm like k-nearest neighbors is, and with very low resolution inputs.
+
+![up](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/up_large.bmp)
+
+![left](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/left_large.bmp)
+
 ## Bill of Materials
 
 - 1 x [Vectron 64](https://github.com/nickbild/vectron_64)
@@ -25,7 +31,7 @@ When this is all put together, you can place your hand in front of the camera wi
 - 1 x Raspberry Pi Camera v2
 - 1 x Logic Level Shifter (3.3V -> 5V)
 - 1 x Logic Level Shifter (5V -> 3.3V)
-- 1 x 74HC32 Quad OR Gate
+- 2 x 74HC32 Quad OR Gate
 - 1 x 74HC595 Shift Register
 - 4 x 74HCT688E Logic Comparator
 - 1 x Miscellaneous Wire
