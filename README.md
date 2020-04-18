@@ -18,11 +18,23 @@ When this is all put together, you can place your hand in front of the camera wi
 
 ## Media
 
-Some examples of downscaled images that the Vectron 64 processes.  They have a beautiful 8-bit appearance.  As someone with more experience working with higher resolution images on artificial neural networks, I was a bit shocked by how accurate a simple algorithm like k-nearest neighbors is, and with very low resolution inputs.
+Some examples of downscaled images that the Vectron 64 processes.  They have a beautiful 8-bit appearance.  As someone with more experience working with higher resolution images on artificial neural networks, I was a bit shocked by how accurate a simple algorithm like k-nearest neighbors is for image classification, and with very low resolution inputs.
 
 ![up](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/up_large.bmp)
 
 ![left](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/left_large.bmp)
+
+The full setup:
+
+![full_setup](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/full_setup_sm.jpg)
+
+Close-up of the AI module:
+
+![ai_module](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/ai_module_sm.jpg)
+
+The camera:
+
+![camera](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/camera_sm.jpg)
 
 ## Bill of Materials
 
