@@ -4,6 +4,10 @@ Train machines like it's 1979!
 
 Vectron AI interfaces with the [Vectron 64](https://github.com/nickbild/vectron_64) breadboard computer (6502 CPU @ 1MHz, 32KB RAM, 32KB ROM) to provide gesture detecting artificial intelligence.  The gesture detection is used to control an Atari 2600 emulator.
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/teaser.gif">
+</p>
+
 ## How It Works
 
 Images are captured, downscaled, and converted to an integer vector by a Raspberry Pi 3 B+.  The vector is then transferred, one byte at a time, to a shift register in Vectron AI.  After each byte is loaded, an interrupt is sent to the Vectron 64 computer.
