@@ -38,7 +38,7 @@ Close-up of the AI module:
 
 The camera:
 
-![camera](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/camera_sms.jpg)
+![camera](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/camera_sm.jpg)
 
 ## Bill of Materials
 
