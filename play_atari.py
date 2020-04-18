@@ -5,6 +5,7 @@
 ####
 import RPi.GPIO as GPIO
 import pyautogui
+import time
 
 
 key_hold_time_sec = 0.1
