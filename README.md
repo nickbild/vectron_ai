@@ -18,7 +18,7 @@ When this is all put together, you can place your hand in front of the camera wi
 
 ## Media
 
-Some examples of downscaled images that the Vectron 64 processes.  They have a beautiful 8-bit appearance.  As someone with more experience working with higher resolution images on artificial neural networks, I was a bit shocked by how accurate a simple algorithm like k-nearest neighbors is for image classification, and with very low resolution inputs.
+First, some examples of downscaled images that the Vectron 64 processes.  They have a beautiful 8-bit appearance.  As someone with more experience working with higher resolution images on artificial neural networks, I was a bit shocked by how accurate a simple algorithm like k-nearest neighbors is for image classification, and with very low resolution inputs.
 
 Hand gesturing "up":
 
