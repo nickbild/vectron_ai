@@ -45,6 +45,12 @@ The camera:
 
 ![camera](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/camera_sm.jpg)
 
+Circuit diagram:
+
+![circuit](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/circuit_diagram_bb.jpg)
+
+[Fritzing Download](https://raw.githubusercontent.com/nickbild/vectron_ai/master/media/circuit_diagram.fzz)
+
 ## Bill of Materials
 
 - 1 x [Vectron 64](https://github.com/nickbild/vectron_64)
